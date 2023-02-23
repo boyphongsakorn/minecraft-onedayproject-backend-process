@@ -57,7 +57,11 @@ let startminecraft = false
 // });
 
 function startmc() {
-  const sh = spawn('sh', ['startmc.bat'], {cwd: '../'});
+  let extension = 'bat'
+  if (process.platform == 'linux') {
+    extension = 'sh'
+  }
+  const sh = spawn('sh', ['startmc.'+extension], {cwd: '../'});
 
   sh.stdout.on('data', (data) => {
     console.log(`stdout: ${data}`);
