@@ -2,13 +2,13 @@ lockfileVersion: 5.4
 
 specifiers:
   discord.js: ^14.7.1
-  minecraft-rcon-client: ^2.1.1
   node-cron: ^3.0.2
+  rcon-client: ^4.2.3
 
 dependencies:
   discord.js: 14.7.1
-  minecraft-rcon-client: 2.1.1
   node-cron: 3.0.2
+  rcon-client: 4.2.3
 
 packages:
 
@@ -141,10 +141,6 @@ packages:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: false
 
-  /minecraft-rcon-client/2.1.1:
-    resolution: {integrity: sha512-Etup1og8qXJ0hDXAKO0qXozxLIn5DPg57LNbZU78G5BbC94tneO+1r2cNrDRpljNAdd3W3Z0h+xxyRCkveDfhA==}
-    dev: false
-
   /node-cron/3.0.2:
     resolution: {integrity: sha512-iP8l0yGlNpE0e6q1o185yOApANRe47UPbLf4YxfbiNHt/RU5eBcGB/e0oudruheSf+LQeDMezqC5BVAb5wwRcQ==}
     engines: {node: '>=6.0.0'}
@@ -155,6 +151,12 @@ packages:
   /peek-readable/5.0.0:
     resolution: {integrity: sha512-YtCKvLUOvwtMGmrniQPdO7MwPjgkFBtFIrmfSbYmYuq3tKDV/mcfAhBth1+C3ru7uXIZasc/pHnb+YDYNkkj4A==}
     engines: {node: '>=14.16'}
+    dev: false
+
+  /rcon-client/4.2.3:
+    resolution: {integrity: sha512-g+DEzI3O0Nl4Y3mPp6DHhSpYeiv+wTq8iKxCumFGO0/SMCsdNfx9bpT5RyHa7phR5dvspKfQK0ZYJp1YCtXNng==}
+    dependencies:
+      typed-emitter: 0.1.0
     dev: false
 
   /readable-stream/3.6.0:
@@ -210,6 +212,10 @@ packages:
 
   /tslib/2.5.0:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
+    dev: false
+
+  /typed-emitter/0.1.0:
+    resolution: {integrity: sha512-Tfay0l6gJMP5rkil8CzGbLthukn+9BN/VXWcABVFPjOoelJ+koW8BuPZYk+h/L+lEeIp1fSzVRiWRPIjKVjPdg==}
     dev: false
 
   /undici/5.19.1:
