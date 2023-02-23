@@ -98,7 +98,8 @@ cron.schedule('*/5 * * * *', () => {
       .setImage('attachment://lottery_' + date + '' + month + '' + year + '.png')
       .setTimestamp()
       //.setFooter('ข้อมูลจาก rapidapi.com/boyphongsakorn/api/thai-lottery1 \nบอทจัดทำโดย Phongsakorn Wisetthon \nให้ค่ากาแฟ buymeacoffee.com/boyphongsakorn');
-      .setFooter({ text: 'ข้อมูลจาก rapidapi.com/boyphongsakorn/api/thai-lottery1 \nบอทจัดทำโดย Phongsakorn Wisetthon \nให้ค่ากาแฟ buymeacoffee.com/boyphongsakorn' });
+      //.setFooter({ text: 'ข้อมูลจาก rapidapi.com/boyphongsakorn/api/thai-lottery1 \nบอทจัดทำโดย Phongsakorn Wisetthon \nให้ค่ากาแฟ buymeacoffee.com/boyphongsakorn' });
+      .setFooter('IP Address : 154.208.140.118:25565');
     client.channels.cache.get('932671627152461936').send({ embeds: [msg]})
       .then(async function (message) {
         //log message id
@@ -123,6 +124,8 @@ cron.schedule('*/5 * * * *', () => {
       console.log('Connected to RCON');
       rcon.send('stop').then(response => {
         console.log(`Response: ${response}`);
+        startdate = null
+        startminecraft = false
         rcon.end();
       }).catch(error => {
         console.error(error);
