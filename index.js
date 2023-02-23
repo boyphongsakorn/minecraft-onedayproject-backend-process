@@ -132,4 +132,5 @@ cron.schedule('*/5 * * * *', () => {
   }
 })
 
+client.login();
 console.log('start now')
