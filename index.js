@@ -33,7 +33,7 @@ const options = {
 const rcon = new Rcon(options);
 
 client.once('ready', () => {
-  client.user.setPresence({ activities: [{ name: 'One Day Project Discord Bot', type: ActivityType.WATCHING }], status: 'online' });
+  client.user.setPresence({ activities: [{ name: 'Server is not running'}], status: 'idle' });
   console.log('Ready!');
 });
 
