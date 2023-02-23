@@ -61,7 +61,7 @@ function startmc() {
   if (process.platform == 'linux') {
     extension = 'sh'
   }
-  const sh = spawn('sh', ['startmc.'+extension], {cwd: '../'});
+  const sh = spawn('cmd.exe', ['/c','startmc.'+extension], {cwd: '../'});
 
   sh.stdout.on('data', (data) => {
     console.log(`stdout: ${data}`);
@@ -81,8 +81,7 @@ cron.schedule('*/5 * * * *', () => {
   if (!startdate && new Date().getHours() == 23 && new Date().getMinutes() == 30 && new Date().getSeconds() == 0) {
     startdate = new Date()
     startminecraft = true
-    startmc()
-	  console.log('start Minecraft Server')
+    console.log('start Minecraft Server')
     //clear presence
     client.user.setPresence({ activities: [{ name: 'Server is starting'}], status: 'online' });
     const msg = new EmbedBuilder()
@@ -109,6 +108,7 @@ cron.schedule('*/5 * * * *', () => {
         //log message id
         console.log(message);
       });
+    startmc()
   }
   //if time from startdate is over 24 hours and 30 minutes run minecraft rcon command to stop server
   if (new Date() - startdate > 24*60*60*1000 + 30*60*1000) {
