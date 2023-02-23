@@ -78,7 +78,7 @@ function startmc() {
 
 cron.schedule('*/5 * * * *', () => {
   //if startdate is not set or real time is 23:30:00 set startdate to new Date() and run startmc.sh
-  if (!startdate && new Date().getHours() == 23 && new Date().getMinutes() == 30 && new Date().getSeconds() == 0) {
+  if (!startdate && new Date().getHours() == 23 && new Date().getMinutes() == 50 && new Date().getSeconds() == 0) {
     startdate = new Date()
     startminecraft = true
     console.log('start Minecraft Server')
@@ -98,16 +98,18 @@ cron.schedule('*/5 * * * *', () => {
         { name: 'เลขท้ายสองตัว', value: json[3][1] },
       )*/
       //.setImage('https://img.gs/fhcphvsghs/full,quality=low/' + imgurl + date + month + year)
-      .setImage('attachment://lottery_' + date + '' + month + '' + year + '.png')
+      //.setImage('attachment://lottery_' + date + '' + month + '' + year + '.png')
       .setTimestamp()
       //.setFooter('ข้อมูลจาก rapidapi.com/boyphongsakorn/api/thai-lottery1 \nบอทจัดทำโดย Phongsakorn Wisetthon \nให้ค่ากาแฟ buymeacoffee.com/boyphongsakorn');
       //.setFooter({ text: 'ข้อมูลจาก rapidapi.com/boyphongsakorn/api/thai-lottery1 \nบอทจัดทำโดย Phongsakorn Wisetthon \nให้ค่ากาแฟ buymeacoffee.com/boyphongsakorn' });
       .setFooter('IP Address : 154.208.140.118:25565');
+
     client.channels.cache.get('932671627152461936').send({ embeds: [msg]})
       .then(async function (message) {
         //log message id
         console.log(message);
       });
+      
     startmc()
   }
   //if time from startdate is over 24 hours and 30 minutes run minecraft rcon command to stop server
