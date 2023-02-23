@@ -79,6 +79,8 @@ cron.schedule('*/5 * * * *', () => {
     startminecraft = true
     startmc()
 	  console.log('start Minecraft Server')
+    //clear presence
+    client.user.setPresence({ activities: [{ name: 'Server is starting'}], status: 'online' });
     const msg = new EmbedBuilder()
       .setColor('#0099ff')
       .setTitle('One Day Project')
