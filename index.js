@@ -12,7 +12,9 @@ const { spawn } = require('child_process');
 const cron = require('node-cron');
 // const Rcon = require('minecraft-rcon-client');
 const Rcon = require('rcon-client').Rcon;
-const { MessageAttachment, EmbedBuilder, Client, GatewayIntentBits, ButtonBuilder, SelectMenuBuilder, ActionRowBuilder, ClientUser, AttachmentBuilder } = require('discord.js');
+const { MessageAttachment, EmbedBuilder, Client, GatewayIntentBits, ActivityType, ButtonBuilder, SelectMenuBuilder, ActionRowBuilder, ClientUser, AttachmentBuilder } = require('discord.js');
+
+require('dotenv').config()
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 
@@ -31,7 +33,7 @@ const options = {
 const rcon = new Rcon(options);
 
 client.once('ready', () => {
-  client.user.setPresence({ activities: [{ name: 'One Day Project Discord Bot', type: 'PLAYING' }], status: 'online' });
+  client.user.setPresence({ activities: [{ name: 'One Day Project Discord Bot', type: ActivityType.WATCHING }], status: 'online' });
   console.log('Ready!');
 });
 
@@ -132,5 +134,5 @@ cron.schedule('*/5 * * * *', () => {
   }
 })
 
-client.login();
+client.login(process.env.DISCORD_TOKEN);
 console.log('start now')
