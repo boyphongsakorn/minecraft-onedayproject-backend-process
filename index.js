@@ -78,7 +78,7 @@ function startmc() {
 
 cron.schedule('*/5 * * * *', () => {
   //if startdate is not set or real time is 23:30:00 set startdate to new Date() and run startmc.sh
-  if (!startdate && new Date().getHours() == 23 && new Date().getMinutes() == 50 && new Date().getSeconds() == 0) {
+  if (!startdate && new Date().getHours() == 23 && new Date().getMinutes() == 30 && new Date().getSeconds() == 0) {
     startdate = new Date()
     startminecraft = true
     console.log('start Minecraft Server')
