@@ -119,6 +119,18 @@ cron.schedule('*/5 * * * *', () => {
         console.log(`Response: ${response}`);
         startdate = null
         startminecraft = false
+        const msg = new EmbedBuilder()
+          .setColor('#0099ff')
+          .setTitle('One Day Project')
+          .setDescription('เซิฟเวอร์ปิดแล้ว')
+          .setTimestamp()
+          .setFooter({text:'เจอกันในอีก 23 ชั่วโมง'});
+
+        client.channels.cache.get('932671627152461936').send({ embeds: [msg]})
+          .then(function (message) {
+            //log message id
+            console.log(message);
+          });
         rcon.end();
       }).catch(error => {
         console.error(error);
