@@ -87,25 +87,12 @@ cron.schedule('*/5 * * * *', () => {
     const msg = new EmbedBuilder()
       .setColor('#0099ff')
       .setTitle('One Day Project')
-      //.setURL('https://www.glo.or.th/')
       .setDescription('เซิฟเวอร์เปิดแล้ว')
-      //.setThumbnail('https://raw.githubusercontent.com/boyphongsakorn/pwisetthon-discord-bot/master/docs/glologo.png')
-      /*.addFields(
-        { name: 'รางวัลที่หนึ่ง', value: json[0][1] },
-        //{ name: '\u200B', value: '\u200B' },
-        { name: 'เลขหน้าสามตัว', value: json[1][1] + ' | ' + json[1][2], inline: true },
-        { name: 'เลขท้ายสามตัว', value: json[2][1] + ' | ' + json[2][2], inline: true },
-        { name: 'เลขท้ายสองตัว', value: json[3][1] },
-      )*/
-      //.setImage('https://img.gs/fhcphvsghs/full,quality=low/' + imgurl + date + month + year)
-      //.setImage('attachment://lottery_' + date + '' + month + '' + year + '.png')
       .setTimestamp()
-      //.setFooter('ข้อมูลจาก rapidapi.com/boyphongsakorn/api/thai-lottery1 \nบอทจัดทำโดย Phongsakorn Wisetthon \nให้ค่ากาแฟ buymeacoffee.com/boyphongsakorn');
-      //.setFooter({ text: 'ข้อมูลจาก rapidapi.com/boyphongsakorn/api/thai-lottery1 \nบอทจัดทำโดย Phongsakorn Wisetthon \nให้ค่ากาแฟ buymeacoffee.com/boyphongsakorn' });
-      .setFooter('IP Address : 154.208.140.118:25565');
+      .setFooter({text:'IP Address : 154.208.140.118:25565'});
 
     client.channels.cache.get('932671627152461936').send({ embeds: [msg]})
-      .then(async function (message) {
+      .then(function (message) {
         //log message id
         console.log(message);
       });
