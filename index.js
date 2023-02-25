@@ -20,8 +20,8 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 
 const options = {
   host: '127.0.0.1',
-  port: 25575, // Default RCON port is 25575
-  password: 'minecraft'
+  port: 25585, // Default RCON port is 25575
+  password: process.env.RCON_PASSWORD
 };
 
 // const client = new Rcon({ // all of those are required!
@@ -98,6 +98,19 @@ cron.schedule('*/5 * * * *', () => {
       });
       
     startmc()
+  } else {
+    if( new Date().getMinutes() % 10 == 0 && new Date().getSeconds() == 0) {
+      //get horus and minutes from now to 23:30:00
+      let hours = 23 - new Date().getHours()
+      let minutes = 30 - new Date().getMinutes()
+      if (hours < 0) {
+        hours = 24 + hours
+      }
+      if (minutes < 0) {
+        minutes = 60 + minutes
+      }
+      client.user.setPresence({ activities: [{ name: 'Server will start in '+hours+' hours '+minutes+' minutes'}], status: 'idle' });
+    }
   }
   //if time from startdate is over 24 hours and 30 minutes run minecraft rcon command to stop server
   if (new Date() - startdate > 24*60*60*1000 + 30*60*1000) {
@@ -130,6 +143,7 @@ cron.schedule('*/5 * * * *', () => {
           .then(function (message) {
             //log message id
             console.log(message);
+            client.user.setPresence({ activities: [{ name: 'Server is shutting down see you in 23 hours'}], status: 'idle' });
           });
         rcon.end();
       }).catch(error => {
