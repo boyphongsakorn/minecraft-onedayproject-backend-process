@@ -99,7 +99,7 @@ cron.schedule('*/5 * * * *', () => {
       
     startmc()
   } else {
-    if( new Date().getMinutes() % 10 == 0 && new Date().getSeconds() == 0) {
+    if( new Date().getMinutes() % 10 == 0 && new Date().getSeconds() == 0 && startminecraft != true) {
       //get horus and minutes from now to 23:30:00
       let hours = 23 - new Date().getHours()
       let minutes = 30 - new Date().getMinutes()
