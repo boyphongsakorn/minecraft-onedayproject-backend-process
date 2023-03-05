@@ -113,48 +113,50 @@ cron.schedule('*/5 * * * *', () => {
     }
   }
   //if time from startdate is over 24 hours and 30 minutes run minecraft rcon command to stop server
-  if (new Date() - startdate > 24*60*60*1000 + 30*60*1000) {
-    // run rcon command to stop server
-    // client.connect().then(() => {
-    //   client.send("stop").then((response) => {
-    //       console.log(response)
-    //       startminecraft = false
-    //       client.disconnect()
-    //   }).catch(err => {
-    //       console.log("An error occurred while sending the query!")
-    //   })
-    // }).catch(err => {
-    //   console.log("Connection to server cannot be established!")
-    // })
-    rcon.connect().then(() => {
-      console.log('Connected to RCON');
-      rcon.send('stop').then(response => {
-        console.log(`Response: ${response}`);
-        startdate = null
-        startminecraft = false
-        const msg = new EmbedBuilder()
-          .setColor('#0099ff')
-          .setTitle('One Day Project')
-          .setDescription('เซิฟเวอร์ปิดแล้ว')
-          .setTimestamp()
-          .setFooter({text:'เจอกันในอีก 23 ชั่วโมง'});
+  if (startdate) {
+    if (new Date() - startdate > 24*60*60*1000 + 30*60*1000) {
+      // run rcon command to stop server
+      // client.connect().then(() => {
+      //   client.send("stop").then((response) => {
+      //       console.log(response)
+      //       startminecraft = false
+      //       client.disconnect()
+      //   }).catch(err => {
+      //       console.log("An error occurred while sending the query!")
+      //   })
+      // }).catch(err => {
+      //   console.log("Connection to server cannot be established!")
+      // })
+      rcon.connect().then(() => {
+        console.log('Connected to RCON');
+        rcon.send('stop').then(response => {
+          console.log(`Response: ${response}`);
+          startdate = null
+          startminecraft = false
+          const msg = new EmbedBuilder()
+            .setColor('#0099ff')
+            .setTitle('One Day Project')
+            .setDescription('เซิฟเวอร์ปิดแล้ว')
+            .setTimestamp()
+            .setFooter({text:'เจอกันในอีก 23 ชั่วโมง'});
 
-        client.channels.cache.get('932671627152461936').send({ embeds: [msg]})
-          .then(function (message) {
-            //log message id
-            console.log(message);
-            client.user.setPresence({ activities: [{ name: 'Server is shutting down see you in 23 hours'}], status: 'idle' });
-          });
-        rcon.end();
+          client.channels.cache.get('932671627152461936').send({ embeds: [msg]})
+            .then(function (message) {
+              //log message id
+              console.log(message);
+              client.user.setPresence({ activities: [{ name: 'Server is shutting down see you in 23 hours'}], status: 'idle' });
+            });
+          rcon.end();
+        }).catch(error => {
+          console.error(error);
+          rcon.end();
+        });
       }).catch(error => {
         console.error(error);
-        rcon.end();
       });
-    }).catch(error => {
-      console.error(error);
-    });
-    //if server is stopped run startmc.sh
-    //if server is started set startdate to new Date()
+      //if server is stopped run startmc.sh
+      //if server is started set startdate to new Date()
+    }
   }
 })
 
