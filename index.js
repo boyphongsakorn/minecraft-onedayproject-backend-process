@@ -182,7 +182,10 @@ cron.schedule('*/5 * * * *', async () => {
           rcon.end();
         });
       }).catch(error => {
-        console.error(error);
+        //console.error(error);
+        console.log('Connection to RCON cannot be established!');
+        startdate = null
+        startminecraft = false
       });
       //if server is stopped run startmc.sh
       //if server is started set startdate to new Date()
