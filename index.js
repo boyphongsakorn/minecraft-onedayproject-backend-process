@@ -118,13 +118,22 @@ cron.schedule('*/5 * * * *', () => {
       }
       client.user.setPresence({ activities: [{ name: 'Server will start in '+hours+' hours '+minutes+' minutes'}], status: 'idle' });
       lobbyrcon.connect().then(() => {
+        console.log("Connected to server!")
         rcon.send('dh line set odp 1 2 "Event จะเริ่มใน '+hours+' ชั่วโมง '+minutes+' นาที"').then(response => {
           console.log(`Response: ${response}`);
-          lobbyrcon.end();
+          // lobbyrcon.end();
         }).catch(err => {
           console.log("An error occurred while sending the query!")
           console.log(err)
         })
+        rcon.send('dh line set odp 1 2 test').then(response => {
+          console.log(`Response: ${response}`);
+          // lobbyrcon.end();
+        }).catch(err => {
+          console.log("An error occurred while sending the query!")
+          console.log(err)
+        })
+        lobbyrcon.end();
       }).catch(err => {
         console.log("Connection to server cannot be established!")
       })
