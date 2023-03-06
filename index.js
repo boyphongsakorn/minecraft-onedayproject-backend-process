@@ -83,7 +83,7 @@ function startmc() {
   });
 }
 
-cron.schedule('*/5 * * * *', () => {
+cron.schedule('*/5 * * * *', async () => {
   //if startdate is not set or real time is 23:30:00 set startdate to new Date() and run startmc.sh
   if (!startdate && new Date().getHours() == 23 && new Date().getMinutes() == 30 && new Date().getSeconds() == 0) {
     startdate = new Date()
@@ -117,26 +117,29 @@ cron.schedule('*/5 * * * *', () => {
         minutes = 60 + minutes
       }
       client.user.setPresence({ activities: [{ name: 'Server will start in '+hours+' hours '+minutes+' minutes'}], status: 'idle' });
-      lobbyrcon.connect().then(() => {
-        console.log("Connected to server!")
-        rcon.send('dh line set odp 1 2 "Event จะเริ่มใน '+hours+' ชั่วโมง '+minutes+' นาที"').then(response => {
-          console.log(`Response: ${response}`);
-          // lobbyrcon.end();
-        }).catch(err => {
-          console.log("An error occurred while sending the query!")
-          console.log(err)
-        })
-        rcon.send('dh line set odp 1 2 test').then(response => {
-          console.log(`Response: ${response}`);
-          // lobbyrcon.end();
-        }).catch(err => {
-          console.log("An error occurred while sending the query!")
-          console.log(err)
-        })
-        lobbyrcon.end();
-      }).catch(err => {
-        console.log("Connection to server cannot be established!")
-      })
+      // lobbyrcon.connect().then(() => {
+      //   console.log("Connected to server!")
+      //   rcon.send('dh line set odp 1 2 "Event จะเริ่มใน '+hours+' ชั่วโมง '+minutes+' นาที"').then(response => {
+      //     console.log(`Response: ${response}`);
+      //     // lobbyrcon.end();
+      //   }).catch(err => {
+      //     console.log("An error occurred while sending the query!")
+      //     console.log(err)
+      //   })
+      //   rcon.send('dh line set odp 1 2 test').then(response => {
+      //     console.log(`Response: ${response}`);
+      //     // lobbyrcon.end();
+      //   }).catch(err => {
+      //     console.log("An error occurred while sending the query!")
+      //     console.log(err)
+      //   })
+      //   lobbyrcon.end();
+      // }).catch(err => {
+      //   console.log("Connection to server cannot be established!")
+      // })
+      await lobbyrcon.connect();
+      await lobbyrcon.send('dh line set odp 1 2 "Event จะเริ่มใน '+hours+' ชั่วโมง '+minutes+' นาที"');
+      await lobbyrcon.end();
     }
   }
   //if time from startdate is over 24 hours and 30 minutes run minecraft rcon command to stop server
