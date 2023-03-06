@@ -103,7 +103,11 @@ cron.schedule('*/5 * * * *', async () => {
         //log message id
         console.log(message);
       });
-      
+    
+    await lobbyrcon.connect();
+    await lobbyrcon.send('dh line set odp 1 2 "Event เริ่มแล้ว"');
+    await lobbyrcon.end();
+
     startmc()
   } else {
     if(new Date().getMinutes() % 10 == 0 && new Date().getSeconds() == 0 && startminecraft != true) {
@@ -157,36 +161,59 @@ cron.schedule('*/5 * * * *', async () => {
       // }).catch(err => {
       //   console.log("Connection to server cannot be established!")
       // })
-      rcon.connect().then(() => {
-        console.log('Connected to RCON');
-        rcon.send('stop').then(response => {
-          console.log(`Response: ${response}`);
-          startdate = null
-          startminecraft = false
-          const msg = new EmbedBuilder()
-            .setColor('#0099ff')
-            .setTitle('One Day Project')
-            .setDescription('เซิฟเวอร์ปิดแล้ว')
-            .setTimestamp()
-            .setFooter({text:'เจอกันในอีก 23 ชั่วโมง'});
+      // rcon.connect().then(() => {
+      //   console.log('Connected to RCON');
+      //   rcon.send('stop').then(response => {
+      //     console.log(`Response: ${response}`);
+      //     startdate = null
+      //     startminecraft = false
+      //     const msg = new EmbedBuilder()
+      //       .setColor('#0099ff')
+      //       .setTitle('One Day Project')
+      //       .setDescription('เซิฟเวอร์ปิดแล้ว')
+      //       .setTimestamp()
+      //       .setFooter({text:'เจอกันในอีก 23 ชั่วโมง'});
 
-          client.channels.cache.get('932671627152461936').send({ embeds: [msg]})
-            .then(function (message) {
-              //log message id
-              console.log(message);
-              client.user.setPresence({ activities: [{ name: 'Server is shutting down see you in 23 hours'}], status: 'idle' });
-            });
-          rcon.end();
-        }).catch(error => {
-          console.error(error);
-          rcon.end();
-        });
-      }).catch(error => {
-        //console.error(error);
-        console.log('Connection to RCON cannot be established!');
+      //     client.channels.cache.get('932671627152461936').send({ embeds: [msg]})
+      //       .then(function (message) {
+      //         //log message id
+      //         console.log(message);
+      //         client.user.setPresence({ activities: [{ name: 'Server is shutting down see you in 23 hours'}], status: 'idle' });
+      //       });
+      //     rcon.end();
+      //   }).catch(error => {
+      //     console.error(error);
+      //     rcon.end();
+      //   });
+      // }).catch(error => {
+      //   //console.error(error);
+      //   console.log('Connection to RCON cannot be established!');
+      //   startdate = null
+      //   startminecraft = false
+      // });
+      try {
+        await rcon.connect();
+        await rcon.send('stop');
+        await rcon.end();
         startdate = null
         startminecraft = false
-      });
+        const msg = new EmbedBuilder()
+          .setColor('#0099ff')
+          .setTitle('One Day Project')
+          .setDescription('เซิฟเวอร์ปิดแล้ว')
+          .setTimestamp()
+          .setFooter({text:'เจอกันในอีก 23 ชั่วโมง'});
+
+        client.channels.cache.get('932671627152461936').send({ embeds: [msg]})
+          .then(function (message) {
+            //log message id
+            console.log(message);
+            client.user.setPresence({ activities: [{ name: 'Server is shutting down see you in 23 hours'}], status: 'idle' });
+          });
+      } catch (error) {
+        startdate = null
+        startminecraft = false
+      }
       //if server is stopped run startmc.sh
       //if server is started set startdate to new Date()
     }
