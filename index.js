@@ -120,6 +120,9 @@ cron.schedule('*/5 * * * *', async () => {
       if (minutes < 0) {
         minutes = 60 + minutes
       }
+      await lobbyrcon.connect();
+      await lobbyrcon.send('dh line set odp 1 2 "Event จะเริ่มใน '+hours+' ชั่วโมง '+minutes+' นาที"');
+      lobbyrcon.end();
       client.user.setPresence({ activities: [{ name: 'Server will start in '+hours+' hours '+minutes+' minutes'}], status: 'idle' });
       // lobbyrcon.connect().then(() => {
       //   console.log("Connected to server!")
@@ -141,9 +144,6 @@ cron.schedule('*/5 * * * *', async () => {
       // }).catch(err => {
       //   console.log("Connection to server cannot be established!")
       // })
-      await lobbyrcon.connect();
-      await lobbyrcon.send('dh line set odp 1 2 "Event จะเริ่มใน '+hours+' ชั่วโมง '+minutes+' นาที"');
-      lobbyrcon.end();
     }
   }
   //if time from startdate is over 24 hours and 30 minutes run minecraft rcon command to stop server
