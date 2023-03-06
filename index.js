@@ -106,7 +106,7 @@ cron.schedule('*/5 * * * *', async () => {
     
     await lobbyrcon.connect();
     await lobbyrcon.send('dh line set odp 1 2 "Event เริ่มแล้ว"');
-    await lobbyrcon.end();
+    lobbyrcon.end();
 
     startmc()
   } else {
@@ -143,7 +143,7 @@ cron.schedule('*/5 * * * *', async () => {
       // })
       await lobbyrcon.connect();
       await lobbyrcon.send('dh line set odp 1 2 "Event จะเริ่มใน '+hours+' ชั่วโมง '+minutes+' นาที"');
-      await lobbyrcon.end();
+      lobbyrcon.end();
     }
   }
   //if time from startdate is over 24 hours and 30 minutes run minecraft rcon command to stop server
@@ -194,7 +194,7 @@ cron.schedule('*/5 * * * *', async () => {
       try {
         await rcon.connect();
         await rcon.send('stop');
-        await rcon.end();
+        rcon.end();
         startdate = null
         startminecraft = false
         const msg = new EmbedBuilder()
